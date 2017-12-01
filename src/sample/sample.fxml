@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -28,7 +30,9 @@
         <menus>
           <Menu mnemonicParsing="false" text="Файл">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem mnemonicParsing="false" text="Сохранить" />
+                  <MenuItem mnemonicParsing="false" text="Загрузить" />
+                  <MenuItem mnemonicParsing="false" text="Выйти" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Изменить">
@@ -44,6 +48,18 @@
             <Menu mnemonicParsing="false" text="О нас" />
         </menus>
       </MenuBar>
-      <ColorPicker prefHeight="71.0" prefWidth="312.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <ColorPicker prefHeight="25.0" prefWidth="75.0" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="110.0" />
+         </GridPane.margin></ColorPicker>
+      <ChoiceBox prefWidth="75.0" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="170.0" />
+         </GridPane.margin></ChoiceBox>
+      <ChoiceBox prefWidth="150.0" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="230.0" />
+         </GridPane.margin>
+      </ChoiceBox>
    </children>
 </GridPane>
