@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" prefHeight="720.0" prefWidth="985.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <rowConstraints>
+      <RowConstraints minHeight="20.0" prefHeight="20.0" />
+      <RowConstraints minHeight="50.0" prefHeight="250.0" />
+      <RowConstraints minHeight="10.0" prefHeight="10.0" />
+      <RowConstraints minHeight="50.0" prefHeight="75.0" />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints minWidth="10.0" prefWidth="75.0" />
+      <ColumnConstraints minWidth="10.0" prefWidth="400.0" />
+      <ColumnConstraints minWidth="10.0" prefWidth="10.0" />
+   </columnConstraints>
+   <children>
+      <ScrollBar GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <ScrollBar orientation="VERTICAL" prefHeight="512.0" prefWidth="14.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <MenuBar prefHeight="25.0" prefWidth="367.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
+        <menus>
+          <Menu mnemonicParsing="false" text="Файл">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Изменить">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Помощь">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Тех.Поддержка" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="О нас" />
+        </menus>
+      </MenuBar>
+      <ColorPicker prefHeight="71.0" prefWidth="312.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   </children>
+</GridPane>
