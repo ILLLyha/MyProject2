@@ -11,11 +11,20 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        Parent root = loader.load();
+        Controller controller = loader.getController();
+        primaryStage.setTitle("PochtiPaint");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
+
+        Stage supportStage = new Stage();
+        Parent supportLoader = FXMLLoader.load(getClass().getResource("support.fxml"));
+        supportStage.setTitle("PochtiPaint");
+        supportStage.setScene(new Scene(supportLoader));
+        supportStage.setResizable(false);
+        controller.supportStage = supportStage;
     }
 
 
