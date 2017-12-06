@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Support">
+   <children>
+      <Pane layoutX="3.0" layoutY="2.0" prefHeight="392.0" prefWidth="591.0">
+         <children>
+            <Button layoutX="66.0" layoutY="319.0" mnemonicParsing="false" onAction="#onSend" prefHeight="44.0" prefWidth="119.0" text="Отправить" />
+            <Button layoutX="408.0" layoutY="319.0" mnemonicParsing="false" onAction="#onClose" prefHeight="44.0" prefWidth="119.0" text="Закрыть" />
+            <Label layoutX="28.0" layoutY="14.0" prefHeight="71.0" prefWidth="513.0" text="Здравствуйте, если у Вас возникла проблемма, сообщите нам о ней. Пожалуйста, укажите:1) Ваш Е маил 2) Ваше имя 3) Суть проблемы. Спасибо, мы с Вами свяжемся." wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <TextArea fx:id="theSupText" layoutX="27.0" layoutY="95.0" prefHeight="211.0" prefWidth="537.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

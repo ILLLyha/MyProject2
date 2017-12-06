@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" prefHeight="720.0" prefWidth="985.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane fx:id="backgroundd" alignment="center" hgap="10" prefHeight="527.0" prefWidth="825.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <rowConstraints>
       <RowConstraints minHeight="20.0" prefHeight="20.0" />
-      <RowConstraints minHeight="50.0" prefHeight="250.0" />
-      <RowConstraints minHeight="10.0" prefHeight="10.0" />
+      <RowConstraints minHeight="50.0" prefHeight="350.0" />
+      <RowConstraints minHeight="10.0" prefHeight="13.0" />
       <RowConstraints minHeight="50.0" prefHeight="75.0" />
    </rowConstraints>
    <columnConstraints>
       <ColumnConstraints minWidth="10.0" prefWidth="75.0" />
-      <ColumnConstraints minWidth="10.0" prefWidth="400.0" />
-      <ColumnConstraints minWidth="10.0" prefWidth="10.0" />
+      <ColumnConstraints minWidth="10.0" prefWidth="700.0" />
+      <ColumnConstraints minWidth="10.0" prefWidth="13.0" />
    </columnConstraints>
    <children>
       <ScrollBar GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -32,23 +35,24 @@
             <items>
                   <MenuItem mnemonicParsing="false" text="Сохранить" />
                   <MenuItem mnemonicParsing="false" text="Загрузить" />
-                  <MenuItem mnemonicParsing="false" text="Выйти" />
+                  <MenuItem fx:id="out" mnemonicParsing="false" onAction="#onExit" text="Выйти" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Изменить">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Удалить" />
+                  <MenuItem mnemonicParsing="false" text="Очистить всё" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Помощь">
             <items>
-              <MenuItem mnemonicParsing="false" text="Тех.Поддержка" />
+              <MenuItem mnemonicParsing="false" onAction="#onSup" text="Тех.Поддержка" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="О нас" />
         </menus>
       </MenuBar>
-      <ColorPicker prefHeight="25.0" prefWidth="75.0" GridPane.rowIndex="1">
+      <ColorPicker fx:id="colorPicker" prefHeight="25.0" prefWidth="75.0" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="110.0" />
          </GridPane.margin></ColorPicker>
@@ -61,5 +65,26 @@
             <Insets bottom="230.0" />
          </GridPane.margin>
       </ChoiceBox>
+      <Canvas fx:id="canvas" height="351.0" width="700.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="68.0" text="Кисть" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </RadioButton>
+      <RadioButton mnemonicParsing="false" text="Курсор" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" top="50.0" />
+         </GridPane.margin>
+      </RadioButton>
+      <RadioButton mnemonicParsing="false" text="Ластик" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" top="100.0" />
+         </GridPane.margin>
+      </RadioButton>
+      <CheckBox mnemonicParsing="false" text="Сетка" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="10.0" top="300.0" />
+         </GridPane.margin>
+      </CheckBox>
    </children>
 </GridPane>
