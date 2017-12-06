@@ -47,9 +47,9 @@
           <Menu mnemonicParsing="false" text="Помощь">
             <items>
               <MenuItem fx:id="but" mnemonicParsing="false" onAction="#onSup" text="Тех.Поддержка" />
+                  <MenuItem fx:id="butе" mnemonicParsing="false" onAction="#onAb" text="О нас" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="О нас" />
         </menus>
       </MenuBar>
       <ColorPicker fx:id="colorPicker" prefHeight="25.0" prefWidth="75.0" GridPane.rowIndex="1">

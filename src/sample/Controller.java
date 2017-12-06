@@ -50,6 +50,12 @@ public class Controller implements Initializable {
 
         }
 
+    public Stage aboutStage;
+
+    public void onAb(ActionEvent actionEvent) throws IOException {
+        aboutStage.show();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
