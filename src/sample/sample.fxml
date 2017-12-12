@@ -3,45 +3,43 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="backgroundd" alignment="center" hgap="10" prefHeight="527.0" prefWidth="825.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" prefHeight="527.0" prefWidth="825.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <rowConstraints>
       <RowConstraints minHeight="20.0" prefHeight="20.0" />
       <RowConstraints minHeight="50.0" prefHeight="350.0" />
-      <RowConstraints minHeight="10.0" prefHeight="13.0" />
       <RowConstraints minHeight="50.0" prefHeight="75.0" />
    </rowConstraints>
    <columnConstraints>
-      <ColumnConstraints minWidth="10.0" prefWidth="75.0" />
+      <ColumnConstraints minWidth="10.0" prefWidth="150.0" />
       <ColumnConstraints minWidth="10.0" prefWidth="700.0" />
-      <ColumnConstraints minWidth="10.0" prefWidth="13.0" />
+      <ColumnConstraints />
    </columnConstraints>
    <children>
-      <ScrollBar GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <ScrollBar orientation="VERTICAL" prefHeight="512.0" prefWidth="14.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <MenuBar prefHeight="25.0" prefWidth="367.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
         <menus>
           <Menu mnemonicParsing="false" text="Файл">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Сохранить" />
-                  <MenuItem mnemonicParsing="false" text="Загрузить" />
+                  <MenuItem mnemonicParsing="false" onAction="#onSave" text="Сохранить" />
+                  <MenuItem mnemonicParsing="false" onAction="#onSaveAs" text="Сохранить как..." />
+                  <MenuItem mnemonicParsing="false" onAction="#onOpen" text="Загрузить" />
                   <MenuItem fx:id="out" mnemonicParsing="false" onAction="#onExit" text="Выйти" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Изменить">
             <items>
               <MenuItem mnemonicParsing="false" text="Удалить" />
-                  <MenuItem mnemonicParsing="false" text="Очистить всё" />
+                  <MenuItem fx:id="clearButton" mnemonicParsing="false" onAction="#onClear" text="Очистить всё" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Помощь">
@@ -52,33 +50,13 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ColorPicker fx:id="colorPicker" prefHeight="25.0" prefWidth="75.0" GridPane.rowIndex="1">
+      <ColorPicker fx:id="colorPicker" prefHeight="45.0" prefWidth="127.0" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="110.0" />
          </GridPane.margin></ColorPicker>
-      <ChoiceBox prefWidth="75.0" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets bottom="170.0" />
-         </GridPane.margin></ChoiceBox>
-      <ChoiceBox prefWidth="150.0" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets bottom="230.0" />
-         </GridPane.margin>
-      </ChoiceBox>
-      <Canvas fx:id="canvas" height="351.0" width="700.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="68.0" text="Кисть" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets left="5.0" />
-         </GridPane.margin>
-      </RadioButton>
       <RadioButton mnemonicParsing="false" text="Курсор" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="5.0" top="50.0" />
-         </GridPane.margin>
-      </RadioButton>
-      <RadioButton mnemonicParsing="false" text="Ластик" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets left="5.0" top="100.0" />
+            <Insets left="10.0" top="50.0" />
          </GridPane.margin>
       </RadioButton>
       <CheckBox mnemonicParsing="false" text="Сетка" GridPane.rowIndex="1">
@@ -86,5 +64,24 @@
             <Insets left="10.0" top="300.0" />
          </GridPane.margin>
       </CheckBox>
+      <MenuButton fx:id="brushSelectButton" mnemonicParsing="false" text="Кисть" GridPane.rowIndex="1">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#setBrushBrush" text="Кисть " />
+          <MenuItem mnemonicParsing="false" onAction="#setBrushPencil" text="Карандаш" />
+        </items>
+         <GridPane.margin>
+            <Insets bottom="290.0" />
+         </GridPane.margin>
+      </MenuButton>
+      <CheckBox mnemonicParsing="false" text="Ластик" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin></CheckBox>
+      <TextField fx:id="brushSize" text="18" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="210.0" />
+         </GridPane.margin>
+      </TextField>
+      <Canvas fx:id="canvas" height="351.0" width="700.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.lang.reflect.Method;
@@ -19,6 +20,8 @@ public class Support {
 
 
     public void onSend(ActionEvent actionEvent) {
+
+
         //создаем новое окно, отправляем текст
     }
 }

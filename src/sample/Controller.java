@@ -1,34 +1,29 @@
 package sample;
 
-import com.sun.org.apache.bcel.internal.generic.GOTO;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import sun.security.action.OpenFileInputStreamAction;
-
-import javax.swing.event.TreeModelEvent;
+import javafx.stage.StageStyle;
+import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Set;
 
-import static sample.WIWNW.getScreenSize;
+import static sample.helpers.*;
+
 
 public class Controller implements Initializable {
 
@@ -56,22 +51,21 @@ private final FileChooser openFileChooser = new FileChooser();
 
 // For setBrushBrush and setBrushPencil
 private boolean isBrushBrush;
+
+
 private Dimension screenSize;
 
-
-
-    //private Controller children;
-    //private Controller parent;
 
     public void initialize() {
         GraphicsContext g = canvas.getGraphicsContext2D();
         setBrushBrush();
 
+
         Dimension screenSize = getScreenSize();
         double screenWidth = screenSize.getWidth();
         double screenHeight = screenSize.getHeight();
-        canvas.setHeight(screenHeight / 1.5);
-        canvas.setWidth(screenWidth / 1.5);
+        canvas.setHeight(screenHeight/1.5);
+        canvas.setWidth(screenWidth/1.5);
 
         canvas.setStyle("-fx-background-color: rgba(255, 255, 255, 1);");
 
@@ -132,9 +126,7 @@ private Dimension screenSize;
     }
 
 
-    public void onExit(ActionEvent actionEvent) {
-        Platform.exit();
-    }
+
 
     public Stage supportStage;
 
@@ -142,7 +134,7 @@ private Dimension screenSize;
 
         supportStage.show();
 
-       // System.out.println("Должно открыться новое окно");
+
 
 
 
@@ -160,14 +152,86 @@ private Dimension screenSize;
     }
 
 
-    public void OnDr(MouseEvent mouseEvent) {
-        Canvas.setOnMouseDragged((MouseDragEvent) -> {
-            if(rootLayoutEventController.pencil){
-                gc.lineTo(MouseDragEvent.getX(), MouseDragEvent.getY());
+  //  public void OnDr(MouseEvent mouseEvent) {
 
-                gc.stroke();
-                gc.moveTo(MouseDragEvent.getX(), MouseDragEvent.getY());
-            }
-        });
+  //  }
+
+
+    public void onSave(ActionEvent actionEvent) {
+        try{
+
+            Image snapshot = canvas.snapshot(null, null);
+            ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", new File("paint.png"));
+
+
+
+        } catch (Exception e){
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+
+        }
     }
+
+    public void onSaveAs(ActionEvent actionEvent) {
+        Stage stage = new Stage(StageStyle.UTILITY);
+        fileChooser.setTitle("Сохранить картинку как...");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files", "*.png");
+        fileChooser.getExtensionFilters().add(extFilter);
+        try {
+
+            Image snapshot = canvas.snapshot(null, null);
+            File file = fileChooser.showSaveDialog(stage);
+            String filepath = file.getAbsolutePath();
+
+
+            if (file != null) {
+                ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", file);
+
+            } else {
+
+            }
+        } catch (Exception e){
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+
+        }
+    }
+
+    public void onOpen(ActionEvent actionEvent) {
+        GraphicsContext g = canvas.getGraphicsContext2D();
+
+        Stage stage = new Stage(StageStyle.UTILITY);
+        openFileChooser.setTitle("Открыть картинку");
+
+
+        FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG files", "*.png");
+        openFileChooser.getExtensionFilters().add(pngFilter);
+
+
+        FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPG files", "*.jpeg, *.jpg");
+        openFileChooser.getExtensionFilters().add(jpegFilter);
+        try{
+            File openImageFile = openFileChooser.showOpenDialog(stage);
+            InputStream fileStream = new FileInputStream(openImageFile);
+            javafx.scene.image.Image openImage = new Image(fileStream);
+            String filepath = openImageFile.getAbsolutePath();
+
+            if (openImageFile != null){
+                g.drawImage(openImage, 0, 0);
+
+            } else {
+
+            }
+        } catch (Exception e){
+
+        }
+    }
+
+    public void onExit(ActionEvent actionEvent) {
+        Platform.exit();
+    }
+
 }
+

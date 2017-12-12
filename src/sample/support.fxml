@@ -12,7 +12,7 @@
       <Pane layoutX="3.0" layoutY="2.0" prefHeight="392.0" prefWidth="591.0">
          <children>
             <Button layoutX="66.0" layoutY="319.0" mnemonicParsing="false" onAction="#onSend" prefHeight="44.0" prefWidth="119.0" text="Отправить" />
-            <Button layoutX="408.0" layoutY="319.0" mnemonicParsing="false" onAction="#onClose" prefHeight="44.0" prefWidth="119.0" text="Закрыть" />
+            <Button layoutX="408.0" layoutY="319.0" mnemonicParsing="false" onAction="#onClose" prefHeight="44.0" prefWidth="119.0" text="Закрыть" visible="false" />
             <Label layoutX="28.0" layoutY="14.0" prefHeight="71.0" prefWidth="513.0" text="Здравствуйте, если у Вас возникла проблемма, сообщите нам о ней. Пожалуйста, укажите:1) Ваш Е маил 2) Ваше имя 3) Суть проблемы. Спасибо, мы с Вами свяжемся." wrapText="true">
                <font>
                   <Font size="14.0" />
