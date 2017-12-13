@@ -71,7 +71,7 @@ public class Controller implements Initializable {
         isBrushBrush = false;
         brushSelectButton.setText("Карандаш");
     }
-    
+
 
     public void onClear() {
         GraphicsContext g = canvas.getGraphicsContext2D();
