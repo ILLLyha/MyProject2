@@ -13,119 +13,71 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sun.java2d.loops.DrawParallelogram;
+import sun.java2d.pipe.DrawImage;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static sample.helpers.*;
+import static sample.WIWDW.*;
 
 
 public class Controller implements Initializable {
 
+    @FXML
+    private Canvas canvas;
 
-@FXML
-private Canvas canvas;
+    @FXML
+    private ColorPicker colorPicker;
 
-@FXML
-private ColorPicker colorPicker;
+    @FXML
+    private TextField brushSize;
 
-@FXML
-private TextField brushSize;
+    @FXML
+    private CheckBox eraser;
 
-@FXML
-private CheckBox eraser;
+    @FXML
+    private MenuButton brushSelectButton;
 
-@FXML
-private MenuButton brushSelectButton;
+    // For onSaveAs
+    private final FileChooser fileChooser = new FileChooser();
 
-// For onSaveAs
-private final FileChooser fileChooser = new FileChooser();
+    // For onOpen
+    private final FileChooser openFileChooser = new FileChooser();
 
-// For onOpen
-private final FileChooser openFileChooser = new FileChooser();
-
-// For setBrushBrush and setBrushPencil
-private boolean isBrushBrush;
+    // For setBrushBrush and setBrushPencil
+    private boolean isBrushBrush;
 
 
-private Dimension screenSize;
-
+    private Dimension screenSize;
 
     public void initialize() {
-        GraphicsContext g = canvas.getGraphicsContext2D();
-        setBrushBrush();
 
-
-        Dimension screenSize = getScreenSize();
-        double screenWidth = screenSize.getWidth();
-        double screenHeight = screenSize.getHeight();
-        canvas.setHeight(screenHeight/1.5);
-        canvas.setWidth(screenWidth/1.5);
-
-        canvas.setStyle("-fx-background-color: rgba(255, 255, 255, 1);");
-
-        canvas.setOnMouseDragged(e -> {
-            double size = Double.parseDouble(brushSize.getText());
-            double x = e.getX() - size / 2;
-            double y = e.getY() - size / 2;
-
-            if (eraser.isSelected()) {
-                g.clearRect(x, y, size, size);
-            } else {
-
-                g.setFill(colorPicker.getValue());
-                if (isBrushBrush) {
-                    g.fillOval(x, y, size, size);
-                } else {
-                    g.fillRect(x, y, size, size);
-                }
-            }
-        });
-
-        canvas.setOnMouseClicked(e -> {
-            double size = Double.parseDouble(brushSize.getText());
-            double x = e.getX() - size / 2;
-            double y = e.getY() - size / 2;
-
-            if (eraser.isSelected()) {
-                g.clearRect(x, y, size, size);
-            } else {
-                g.setFill(colorPicker.getValue());
-                if (isBrushBrush) {
-                    g.fillOval(x, y, size, size);
-                } else {
-                    g.fillRect(x, y, size, size);
-                }
-            }
-        });
     }
 
-    public void setBrushBrush(){
-        isBrushBrush  = true;
+    public void setBrushBrush() {
+        isBrushBrush = true;
         brushSelectButton.setText("Кисть");
     }
 
-
-
-    public void setBrushPencil(){
-        isBrushBrush  = false;
+    public void setBrushPencil() {
+        isBrushBrush = false;
         brushSelectButton.setText("Карандаш");
     }
-
-
+    
 
     public void onClear() {
         GraphicsContext g = canvas.getGraphicsContext2D();
         g.clearRect(0, 0, 10000, 10000);
 
     }
-
-
 
 
     public Stage supportStage;
@@ -135,10 +87,7 @@ private Dimension screenSize;
         supportStage.show();
 
 
-
-
-
-        }
+    }
 
     public Stage aboutStage;
 
@@ -148,24 +97,33 @@ private Dimension screenSize;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setBrushBrush();
 
+        Dimension screenSize = getScreenSize();
+        double screenWidth = screenSize.getWidth();
+        double screenHeight = screenSize.getHeight();
+        canvas.setHeight(screenHeight / 1.5);
+        canvas.setWidth(screenWidth / 1.5);
+
+       canvas.setStyle("-fx-background-color: rgba(255, 255, 255, 1);");
+
+        GraphicsContext g = canvas.getGraphicsContext2D();
+        canvas.setOnMouseDragged(e -> { MouseDragged(e);});
+        canvas.setOnMouseClicked(e -> MouseClicked(e));
     }
 
 
-  //  public void OnDr(MouseEvent mouseEvent) {
 
-  //  }
 
 
     public void onSave(ActionEvent actionEvent) {
-        try{
+        try {
 
             Image snapshot = canvas.snapshot(null, null);
             ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", new File("paint.png"));
 
 
-
-        } catch (Exception e){
+        } catch (Exception e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
@@ -191,7 +149,7 @@ private Dimension screenSize;
             } else {
 
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
@@ -205,26 +163,25 @@ private Dimension screenSize;
         Stage stage = new Stage(StageStyle.UTILITY);
         openFileChooser.setTitle("Открыть картинку");
 
-
         FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG files", "*.png");
         openFileChooser.getExtensionFilters().add(pngFilter);
 
 
         FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPG files", "*.jpeg, *.jpg");
         openFileChooser.getExtensionFilters().add(jpegFilter);
-        try{
+        try {
             File openImageFile = openFileChooser.showOpenDialog(stage);
             InputStream fileStream = new FileInputStream(openImageFile);
             javafx.scene.image.Image openImage = new Image(fileStream);
             String filepath = openImageFile.getAbsolutePath();
 
-            if (openImageFile != null){
+            if (openImageFile != null) {
                 g.drawImage(openImage, 0, 0);
 
             } else {
 
             }
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -233,5 +190,49 @@ private Dimension screenSize;
         Platform.exit();
     }
 
-}
+    public void MouseClicked(MouseEvent e) {
+        double size = Double.parseDouble(brushSize.getText());
+        double x = e.getX() - size / 2;
+        double y = e.getY() - size / 2;
 
+        GraphicsContext g = canvas.getGraphicsContext2D();
+
+        if (eraser.isSelected()) {
+            g.clearRect(x, y, size, size);
+        } else {
+            g.setFill(colorPicker.getValue());
+            if (isBrushBrush) {
+                g.fillOval(x, y, size, size);
+            } else {
+                g.fillRect(x, y, size, size);
+            }
+        }
+    }
+
+    public void MouseDragged(MouseEvent e) {
+        double size = Double.parseDouble(brushSize.getText());
+        double x = e.getX() - size / 2;
+        double y = e.getY() - size / 2;
+
+        GraphicsContext g = canvas.getGraphicsContext2D();
+
+        if (eraser.isSelected()) {
+            g.clearRect(x, y, size, size);
+        } else {
+            g.setFill(colorPicker.getValue());
+            if (isBrushBrush) {
+                g.fillOval(x, y, size, size);
+            } else {
+                g.fillRect(x, y, size, size);
+            }
+        }
+    }
+
+    public void ChBx(ActionEvent actionEvent) {
+
+       Image imagee = new Image("https://upload.wikimedia.org/wikipedia/en/c/cc/JavaFX_Logo.png");
+
+
+
+    }
+}
