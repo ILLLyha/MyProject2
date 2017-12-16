@@ -46,6 +46,13 @@ public class Controller implements Initializable {
     @FXML
     private MenuButton brushSelectButton;
 
+    @FXML
+    private TextField figutHeight;
+
+    @FXML
+    private TextField figutWeight;
+
+
     // For onSaveAs
     private final FileChooser fileChooser = new FileChooser();
 
@@ -110,6 +117,8 @@ public class Controller implements Initializable {
         GraphicsContext g = canvas.getGraphicsContext2D();
         canvas.setOnMouseDragged(e -> { MouseDragged(e);});
         canvas.setOnMouseClicked(e -> MouseClicked(e));
+        canvas.setOnMouseClicked(e -> OnCircle(e));
+
     }
 
 
@@ -228,11 +237,19 @@ public class Controller implements Initializable {
         }
     }
 
-    public void ChBx(ActionEvent actionEvent) {
+ /*   public void Figures(MouseEvent e){
 
-       Image imagee = new Image("https://upload.wikimedia.org/wikipedia/en/c/cc/JavaFX_Logo.png");
+    }*/
 
-
-
+    public void OnCircle(MouseEvent e) {
+        GraphicsContext context = canvas.getGraphicsContext2D();
+        GraphicsContext g = canvas.getGraphicsContext2D();
+        g.setFill(colorPicker.getValue());
+        // context.setFill(Color.BLUE);
+        double figHg = Double.parseDouble(figutHeight.getText());
+        double figWg = Double.parseDouble(figutWeight.getText());
+        double x = e.getX() - figWg / 2;
+        double y = e.getY() - figHg / 2;
+        context.fillOval(x, y, figWg, figHg);
     }
 }
