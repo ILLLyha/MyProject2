@@ -252,4 +252,5 @@ public class Controller implements Initializable {
         double y = e.getY() - figHg / 2;
         context.fillOval(x, y, figWg, figHg);
     }
+
 }

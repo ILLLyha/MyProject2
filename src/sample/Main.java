@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
@@ -17,7 +16,9 @@ public class Main extends Application {
         primaryStage.setTitle("Почти Paint");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new javafx.scene.image.Image("https://im0-tub-ru.yandex.net/i?id=515c704a3876b3a520ec48782fbc1779-l&n=13"));
         primaryStage.show();
+
 
         Stage supportStage = new Stage();
         Parent supportLoader = FXMLLoader.load(getClass().getResource("support.fxml"));

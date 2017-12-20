@@ -2,7 +2,7 @@ package sample;
 
 import java.awt.*;
 
-public class helpers {
+public class WIWDW {
 
     public static void alertUser(){
 
