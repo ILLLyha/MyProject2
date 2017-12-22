@@ -13,12 +13,10 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sun.java2d.loops.DrawParallelogram;
-import sun.java2d.pipe.DrawImage;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -44,13 +42,16 @@ public class Controller implements Initializable {
     private CheckBox eraser;
 
     @FXML
+    private CheckBox rectangle;
+
+    @FXML
     private MenuButton brushSelectButton;
 
     @FXML
     private TextField figutHeight;
 
     @FXML
-    private TextField figutWeight;
+    private TextField figurWeight;
 
 
     // For onSaveAs
@@ -62,6 +63,8 @@ public class Controller implements Initializable {
     // For setBrushBrush and setBrushPencil
     private boolean isBrushBrush;
 
+    private double startX;
+    private double startY;
 
     private Dimension screenSize;
 
@@ -117,7 +120,10 @@ public class Controller implements Initializable {
         GraphicsContext g = canvas.getGraphicsContext2D();
         canvas.setOnMouseDragged(e -> { MouseDragged(e);});
         canvas.setOnMouseClicked(e -> MouseClicked(e));
-        canvas.setOnMouseClicked(e -> OnCircle(e));
+        canvas.setOnMouseClicked(e -> MouseClicked(e));
+      /*  canvas.setOnMouseClicked(f -> OnCircle(f));
+        canvas.setOnMouseClicked(h -> onRect(h));*/
+
 
     }
 
@@ -237,20 +243,55 @@ public class Controller implements Initializable {
         }
     }
 
+public void setLine(MouseEvent e) {
+    GraphicsContext context = canvas.getGraphicsContext2D();
+    double size = Double.parseDouble(brushSize.getText());
+    Line line = new Line();
+    line.setStartX(e.getX() - size / 2);
+    line.setStartY(e.getY() - size / 2);
+    line.setEndX(e.getX() - size / 2);
+    line.setEndY( e.getY() - size / 2);
+
+    }
+
+    public void MousePressed(MouseEvent mouseEvent) {
+        startX = mouseEvent.getX();
+        startY = mouseEvent.getY();
+    }
+
+    public void MouseReleased(MouseEvent mouseEvent) {
+        GraphicsContext context = canvas.getGraphicsContext2D();
+        context.moveTo(startX, startY);
+        context.lineTo(mouseEvent.getX(), mouseEvent.getY());
+    }
+
+
  /*   public void Figures(MouseEvent e){
 
     }*/
 
-    public void OnCircle(MouseEvent e) {
+   /* public void OnCircle(MouseEvent f) {
         GraphicsContext context = canvas.getGraphicsContext2D();
         GraphicsContext g = canvas.getGraphicsContext2D();
         g.setFill(colorPicker.getValue());
         // context.setFill(Color.BLUE);
         double figHg = Double.parseDouble(figutHeight.getText());
-        double figWg = Double.parseDouble(figutWeight.getText());
-        double x = e.getX() - figWg / 2;
-        double y = e.getY() - figHg / 2;
+        double figWg = Double.parseDouble(figurWeight.getText());
+        double x = f.getX() - figWg / 2;
+        double y = f.getY() - figHg / 2;
         context.fillOval(x, y, figWg, figHg);
     }
 
+    public void onRect(MouseEvent h) {
+        GraphicsContext context = canvas.getGraphicsContext2D();
+        GraphicsContext g = canvas.getGraphicsContext2D();
+        g.setFill(colorPicker.getValue());
+        // context.setFill(Color.BLUE);
+        double figHg = Double.parseDouble(figutHeight.getText());
+        double figWg = Double.parseDouble(figurWeight.getText());
+        double x = h.getX() - figWg / 2;
+        double y = h.getY() - figHg / 2;
+        context.fillRect(x, y, figWg, figHg);
+
+    }*/
 }
