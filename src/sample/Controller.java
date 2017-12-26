@@ -75,6 +75,7 @@ public class Controller implements Initializable {
     public void setBrushBrush() {
         isBrushBrush = true;
         brushSelectButton.setText("Кисть");
+
     }
 
     public void setBrushPencil() {
@@ -89,15 +90,6 @@ public class Controller implements Initializable {
 
     }
 
-
-    public Stage supportStage;
-
-    public void onSup(ActionEvent actionEvent) throws IOException {
-
-        supportStage.show();
-
-
-    }
 
     public Stage aboutStage;
 
@@ -121,6 +113,7 @@ public class Controller implements Initializable {
         canvas.setOnMouseDragged(e -> { MouseDragged(e);});
         canvas.setOnMouseClicked(e -> MouseClicked(e));
         canvas.setOnMouseClicked(e -> MouseClicked(e));
+
       /*  canvas.setOnMouseClicked(f -> OnCircle(f));
         canvas.setOnMouseClicked(h -> onRect(h));*/
 
@@ -184,6 +177,7 @@ public class Controller implements Initializable {
 
         FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPG files", "*.jpeg, *.jpg");
         openFileChooser.getExtensionFilters().add(jpegFilter);
+
         try {
             File openImageFile = openFileChooser.showOpenDialog(stage);
             InputStream fileStream = new FileInputStream(openImageFile);
@@ -243,7 +237,7 @@ public class Controller implements Initializable {
         }
     }
 
-public void setLine(MouseEvent e) {
+/*public void setLine(MouseEvent e) {
     GraphicsContext context = canvas.getGraphicsContext2D();
     double size = Double.parseDouble(brushSize.getText());
     Line line = new Line();
@@ -252,9 +246,9 @@ public void setLine(MouseEvent e) {
     line.setEndX(e.getX() - size / 2);
     line.setEndY( e.getY() - size / 2);
 
-    }
+    }*/
 
-    public void MousePressed(MouseEvent mouseEvent) {
+   /* public void MousePressed(MouseEvent mouseEvent) {
         startX = mouseEvent.getX();
         startY = mouseEvent.getY();
     }
@@ -263,7 +257,9 @@ public void setLine(MouseEvent e) {
         GraphicsContext context = canvas.getGraphicsContext2D();
         context.moveTo(startX, startY);
         context.lineTo(mouseEvent.getX(), mouseEvent.getY());
-    }
+    }*/
+
+
 
 
  /*   public void Figures(MouseEvent e){

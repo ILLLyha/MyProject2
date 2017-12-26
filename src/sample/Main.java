@@ -13,19 +13,12 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
         Parent root = loader.load();
         Controller controller = loader.getController();
-        primaryStage.setTitle("Почти Paint");
+        primaryStage.setTitle("SIE");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.getIcons().add(new javafx.scene.image.Image("https://im0-tub-ru.yandex.net/i?id=515c704a3876b3a520ec48782fbc1779-l&n=13"));
         primaryStage.show();
 
-
-        Stage supportStage = new Stage();
-        Parent supportLoader = FXMLLoader.load(getClass().getResource("support.fxml"));
-        supportStage.setTitle("Тех. Поддержка");
-        supportStage.setScene(new Scene(supportLoader));
-        supportStage.setResizable(false);
-        controller.supportStage = supportStage;
 
         Stage aboutStage = new Stage();
         Parent aboutLoader = FXMLLoader.load(getClass().getResource("about.fxml"));

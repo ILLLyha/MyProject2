@@ -6,15 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="680.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.About">
+<AnchorPane prefHeight="670.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.About">
    <children>
-      <ImageView fx:id="Im" fitHeight="343.0" fitWidth="270.0" layoutX="183.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@logo.jpg" />
-         </image></ImageView>
-      <Label layoutX="67.0" layoutY="357.0" prefHeight="240.0" prefWidth="501.0" text="ТипоPaint — сольный проект на окончание курса по Java программированию в Набережно Челнинском IT парке. Направления проекта: закрепить полученные базовые знания от консольных задач до объектно - ориентированного программирования, изучение болле сложных элементов Java FXML. Наша цель почти достигнута, но, как известно, &quot;совершенству нет предела&quot;." wrapText="true">
+      <Label layoutX="72.0" layoutY="398.0" prefHeight="240.0" prefWidth="501.0" text="SIE (Simple Image Editor) — сольный проект на окончание курса по Java программированию в IT парке в г. Набережные Челны. Цель проекта: закрепить полученные базовые знания от консольных задач до объектно - ориентированного программирования, изучение болле сложных элементов Java FXML." wrapText="true">
          <font>
             <Font size="17.0" />
          </font></Label>
+      <ImageView fitHeight="400.0" fitWidth="396.0" layoutX="125.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logo.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

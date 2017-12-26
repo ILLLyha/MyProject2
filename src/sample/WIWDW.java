@@ -11,15 +11,6 @@ public class WIWDW {
     public static Dimension getScreenSize(){
         return Toolkit.getDefaultToolkit().getScreenSize();
     }
-
-
-
-
-
-
-
-
-
 }
 
 
